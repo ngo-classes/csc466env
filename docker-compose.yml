@@ -3,16 +3,16 @@ services:
     build:
       context: ./docker/base
       tags:
-        - "linhbngo/csc466:base-latest"
-    image: linhbngo/csc466:base-latest
+        - "matthorwatt02/csc466:base-latest"
+    image: matthorwatt02/csc466:base-latest
   
   head:
     build:
       context: ./docker/master
       tags:
-        - "linhbngo/csc466:head-latest"
+        - "matthorwatt02/csc466:head-latest"
     init: true
-    image: linhbngo/csc466:head-latest
+    image: matthorwatt02/csc466:head-latest
     ports:
       - "18088:8088"
       - "18000:8000"
@@ -29,7 +29,7 @@ services:
 
   compute01:
     init: true
-    image: linhbngo/csc466:base-latest
+    image: matthorwatt02/csc466:base-latest
     volumes:
       - ../courses:/lectures # courses is a github repo containing lecture materials
       - ./home:/home
@@ -46,7 +46,7 @@ services:
 
   compute02:
     init: true
-    image: linhbngo/csc466:base-latest
+    image: matthorwatt02/csc466:base-latest
     volumes:
       - ../courses:/lectures # courses is a github repo containing lecture materials
       - ./home:/home
