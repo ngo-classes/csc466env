@@ -1,5 +1,10 @@
-FROM linhbngo/csc466:base-latest AS final
+FROM --platform=linux/amd64 csc466:base as stage-amd64
 
+FROM --platform=linux/arm64 csc466/base as stage-arm64
+
+ARG TARGETARCH
+
+FROM stage-${TARGETARCH} as final
 USER student
 
 COPY . /home/student/build
