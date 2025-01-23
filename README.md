@@ -21,13 +21,6 @@ docker compose build base --no-cache
 docker compose build head --no-cache
 ~~~
 
-### Pushing the images
-
-~~~
-docker compose push base
-docker compose push head
-~~~
-
 ### Launching the cluster
 
 - You should launch in the following order:
