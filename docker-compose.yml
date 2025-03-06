@@ -61,6 +61,39 @@ services:
         limits:
           cpus: 2.0
       
+  compute03:
+    init: true
+    image: csc466:base
+    volumes:
+      - ../courses:/lectures # courses is a github repo containing lecture materials
+      - ./home:/home
+    expose:
+      - "22"
+    hostname: compute03
+    container_name: compute03
+    networks:
+      - compute
+    deploy:
+      resources:
+        limits:
+          cpus: 2.0
+
+  compute04:
+    init: true
+    image: csc466:base
+    volumes:
+      - ../courses:/lectures # courses is a github repo containing lecture materials
+      - ./home:/home
+    expose:
+      - "22"
+    hostname: compute04
+    container_name: compute04
+    networks:
+      - compute
+    deploy:
+      resources:
+        limits:
+          cpus: 2.0
 networks:
   compute:
     name: compute
