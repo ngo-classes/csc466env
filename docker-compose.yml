@@ -3,9 +3,7 @@ services:
     build:
       context: ./docker/base
       tags:
-        - "csc466:base"
-    image: csc466:base
-  
+        - "csc466:base"  
   head:
     build:
       context: ./docker/master
@@ -26,7 +24,6 @@ services:
     container_name: head
     networks:
       - compute
-
   compute01:
     init: true
     image: csc466:base
@@ -43,7 +40,6 @@ services:
       resources:
         limits:
           cpus: 2.0
-
   compute02:
     init: true
     image: csc466:base
