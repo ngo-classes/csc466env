@@ -13,6 +13,7 @@ services:
     image: csc466:head-instructor
     ports:
       - "18088:8088"
+      - "18888:8888"
       - "18000:8000"
       - "2222:22"
     volumes:
@@ -33,6 +34,7 @@ services:
     image: csc466:head-student
     ports:
       - "18088:8088"
+      - "18888:8888"
       - "18000:8000"
       - "2222:22"
     volumes:
