@@ -3,50 +3,35 @@ services:
     build:
       context: ./docker/base
       tags:
-        - "csc466:base"  
-  head-instructor:
+        - "csc466:base"
+    image: csc466:base
+  
+  head:
     build:
-      context: ./docker/head-instructor
+      context: ./docker/master
       tags:
-        - "csc466:head-instructor"
+        - "csc466:head"
     init: true
-    image: csc466:head-instructor
+    image: csc466:head
     ports:
       - "18088:8088"
-      - "18888:8888"
       - "18000:8000"
       - "2222:22"
     volumes:
       - ../courses:/lectures # courses is a github repo containing lecture materials
       - ./home:/home
+      - ../grading-scripts:/grading-scripts
+      - ../d2l:/d2l
     expose:
       - "22"
     hostname: head
     container_name: head
     networks:
       - compute
-  head-student:
-    build:
-      context: ./docker/head-student
-      tags:
-        - "csc466:head-student"
-    init: true
-    image: csc466:head-student
-    ports:
-      - "18088:8088"
-      - "18888:8888"
-      - "18000:8000"
-      - "2222:22"
-    volumes:
-      - ../courses:/lectures # courses is a github repo containing lecture materials
-      - ./home:/home
-    expose:
-      - "22"
-    hostname: head
-    container_name: head
-    networks:
-      - compute
-      
+    deploy:
+      resources:
+        limits:
+          cpus: 4.0
   compute01:
     init: true
     image: csc466:base
@@ -63,6 +48,7 @@ services:
       resources:
         limits:
           cpus: 2.0
+
   compute02:
     init: true
     image: csc466:base
@@ -79,40 +65,7 @@ services:
       resources:
         limits:
           cpus: 2.0
-      
-  compute03:
-    init: true
-    image: csc466:base
-    volumes:
-      - ../courses:/lectures # courses is a github repo containing lecture materials
-      - ./home:/home
-    expose:
-      - "22"
-    hostname: compute03
-    container_name: compute03
-    networks:
-      - compute
-    deploy:
-      resources:
-        limits:
-          cpus: 2.0
 
-  compute04:
-    init: true
-    image: csc466:base
-    volumes:
-      - ../courses:/lectures # courses is a github repo containing lecture materials
-      - ./home:/home
-    expose:
-      - "22"
-    hostname: compute04
-    container_name: compute04
-    networks:
-      - compute
-    deploy:
-      resources:
-        limits:
-          cpus: 2.0
 networks:
   compute:
     name: compute
