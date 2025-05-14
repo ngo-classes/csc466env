@@ -6,11 +6,11 @@ services:
         - "csc466:base"
     image: csc466:base
   
-  head:
+  head-instructor:
     build:
-      context: ./docker/master
+      context: ./docker/head-instructor
       tags:
-        - "csc466:head"
+        - "csc466:head-instructor"
     init: true
     image: csc466:head
     ports:
@@ -32,6 +32,31 @@ services:
       resources:
         limits:
           cpus: 4.0
+
+  head-student:
+    build:
+      context: ./docker/head-student
+      tags:
+        - "csc466:head-student"
+    init: true
+    image: csc466:head
+    ports:
+      - "18088:8088"
+      - "18000:8000"
+      - "2222:22"
+    volumes:
+      - ./home:/home
+    expose:
+      - "22"
+    hostname: head
+    container_name: head
+    networks:
+      - compute
+    deploy:
+      resources:
+        limits:
+          cpus: 4.0
+
   compute01:
     init: true
     image: csc466:base
