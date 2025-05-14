@@ -12,14 +12,14 @@ services:
       tags:
         - "csc466:head-instructor"
     init: true
-    image: csc466:head
+    image: csc466:head-instructor
     ports:
       - "18088:8088"
       - "18000:8000"
       - "2222:22"
     volumes:
       - ../courses:/lectures # courses is a github repo containing lecture materials
-      - ./home:/home
+      - home:/home
       - ../grading-scripts:/grading-scripts
       - ../d2l:/d2l
     expose:
@@ -39,13 +39,13 @@ services:
       tags:
         - "csc466:head-student"
     init: true
-    image: csc466:head
+    image: csc466:head-student
     ports:
       - "18088:8088"
       - "18000:8000"
       - "2222:22"
     volumes:
-      - ./home:/home
+      - home:/home
     expose:
       - "22"
     hostname: head
@@ -62,7 +62,7 @@ services:
     image: csc466:base
     volumes:
       - ../courses:/lectures # courses is a github repo containing lecture materials
-      - ./home:/home
+      - home:/home
     expose:
       - "22"
     hostname: compute01
@@ -79,7 +79,7 @@ services:
     image: csc466:base
     volumes:
       - ../courses:/lectures # courses is a github repo containing lecture materials
-      - ./home:/home
+      - home:/home
     expose:
       - "22"
     hostname: compute02
@@ -94,3 +94,6 @@ services:
 networks:
   compute:
     name: compute
+
+volumes:
+  home:

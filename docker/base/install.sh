@@ -23,6 +23,7 @@ microdnf install -y \
     openssh-clients \
     sudo \
     epel-release \
+    git \
     wget \
     vim \
     openldap-clients \
