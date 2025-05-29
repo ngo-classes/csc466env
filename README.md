@@ -35,6 +35,8 @@ docker compose build --no-cache head-student
 
 ### Launching the cluster
 
+- Prior to launching, check `docker-compose.yml` to adjust the `resources` sections of the services being launched. 
+    - It is possible to launch more than two compute nodes (or launch with just one node) by creating additional copy of the `compute-01` service section. You can create the new `compute-xx` service sections and make sure that the `hostname` and `container_name` sections for the new services are changed accordingly. 
 - You should launch in the following order:
 ~~~
 docker compose up -d head-instructor # or head-student
