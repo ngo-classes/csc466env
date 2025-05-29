@@ -16,16 +16,28 @@ git clone https://github.com/class-master/csc466env
 ### Building the images
 
 - You should build the images in the following order:
+
 ~~~
 docker compose build base --no-cache
-docker compose build head --no-cache
+~~~
+
+- If you are an instructor with lecture nodes and grading, build `head-instructor`:
+
+~~~
+docker compose build --no-cache master-instructor
+~~~
+
+- Otherwise, build `head-student`:
+
+~~~
+docker compose build --no-cache head-student
 ~~~
 
 ### Launching the cluster
 
 - You should launch in the following order:
 ~~~
-docker compose up -d head
+docker compose up -d head-instructor # or head-student
 docker compose up -d compute01
 docker compose up -d compute02
 ~~~
@@ -41,7 +53,6 @@ docker compose up -d compute02
 mpicc -o hello mpi_hello_world.c 
 mpirun --host compute01:2,compute02:2 -np 4 ./hello
 ~~~
-
 
 
 After this is done, update `.gitignore` so that temporary files generated in home are not included. 
